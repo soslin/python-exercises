@@ -32,7 +32,7 @@ hours_worked_this_week = int(input("How many hours did you work this week? "))
 your_hourly_rate = float(input("What is your hourly rate? "))
 overtime = hours_worked_this_week - 40
 if overtime > 0:
-    print(hours_worked_this_week*your_hourly_rate + (overtime*your_hourly_rate*1.5 - overtime*your_hourly_rate)
+    print((hours_worked_this_week-1)*your_hourly_rate + overtime*your_hourly_rate*1.5)
 else:
     print(hours_worked_this_week*your_hourly_rate)
 
@@ -65,8 +65,9 @@ while x > -11:
 #the number is less than 1,000,000
 x = 2
 while x < 1_000_000:
-    print(x**2)
-    x **=x
+    print(x)
+    x = x**2
+
 
 #Write a loop that uses print to create the output shown below.
 x = 100
@@ -76,16 +77,18 @@ while x >0:
 
 # Write some code that prompts the user for a number, then shows a multiplication table up 
 # through 10 for that number.
-number_to_input = int(input("Pick a number between 1 and 10: "))
+number_to_input = input("Pick a number between 1 and 10: ")
 while True:
     if number_to_input.isdigit() == False:
         print('Read the directions and try again')
         break
+    number_to_input = int(number_to_input)
     if number_to_input <= 0 or number_to_input > 10:
         print('Not a number between 1 and 10. Try again')
         break
     for i in range(1,11):
-        print(i, ' x ' number_to_input, ' = ', number_to_input*i)
+        print(i, ' x ', number_to_input, ' = ', number_to_input*i)
+    break
         
 # Create a for loop that uses print to create the output shown below.
 for i in range(10):
@@ -99,13 +102,23 @@ for i in range(10):
     
 prompt_odd_number = input('Provide an odd number between 1 and 50: ')
 while True:
-    if int(prompt_odd_number.isdigit()) == False:
+    if prompt_odd_number.isdigit() == False:
         print('Read the directions and try again')
-        continue
-    if (int(prompt_odd_number <=0) or int(prompt_odd_number > 50)) and int(prompt_odd_number % 2 == 0):
+        break
+    prompt_odd_number = int(prompt_odd_number)
+    if (prompt_odd_number <=0 or prompt_odd_number > 50) or prompt_odd_number % 2 == 0:
         print('Not an odd number between 1 and 50. Try again')
+        break
+    break
+print()
+print(f"The number you provided is {prompt_odd_number}")
+print()
+for p in range(1,51,2):
+    if p != prompt_odd_number:
+        print(f'We are printing {p}')
+    if p == prompt_odd_number:
         continue
-if   
+
 
 
 # The input function can be used to prompt for input and use that input in your python code. 

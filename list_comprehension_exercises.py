@@ -1,4 +1,5 @@
-#List comprehensions
+#List comprehensions (first calculated as for loops, then as LCs)
+
 # Example code that creates a list of all of the list of strings in fruits and uppercases every string
 output = []
 for fruit in fruits:
@@ -69,12 +70,31 @@ print([fruit for fruit in fruits if len(fruit) > 5])
 
 
 # 8. Make a list containing the number of characters in each fruit. Output would be [5, 4, 10, etc... ]
-# characters_per_fruit = []
-# for fruit in fruits:
-#     count(fruit)
-# characters_per_fruit.append(fruit)
+characters_per_fruit = []
+for count(fruit) in fruits:
+    characters_per_fruit += fruit
+    print(characters_per_fruit)
 
 
+# Exercise 9 - Make a variable named fruits_with_letter_a that 
+# contains a list of only the fruits that contain the letter "a"
 
-# 9. Make a variable named fruits_with_letter_a that contains a list of only the fruits that contain the letter "a"
 fruits_with_letter_a = []
+for f in fruits:
+    if f in 'a':
+        fruits_with_letter_a.append(f)
+    print (fruits_with_letter_a)
+
+
+
+# Exercise 10 - Make a variable named even_numbers that holds only the even numbers
+numbers = [1,2,3,4,5,6,7,8,9,10]
+
+list_of_evens = []
+for n in numbers:
+    if n % 2 == 0:
+        list_of_evens += n
+    print( list_of_evens)
+
+
+# Exercise 11

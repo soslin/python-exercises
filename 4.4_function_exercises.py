@@ -1,13 +1,13 @@
 # 1. Define a function named is_two. It should accept one input and return True if the passed input 
 # is either the number or the string 2, False otherwise
 def is_two(x):
-    if x == 2 or x == '2':
+    if x == 2 or x == '2': # alternate return x in [2,'2']
         return True
     else:
         return False
-print(is_two(2))
-print(is_two("2"))
-print(is_two(3))
+assert(is_two(2)) == True #only prints if false
+assert(is_two("2")) == True
+assert(is_two(3)) == False
 
 
 # 2. Define a function named is_vowel. It should return True if the passed string is a vowel, False otherwise.
@@ -17,8 +17,8 @@ def is_vowel(letter):
         return True
     else:
         return False
-print(is_vowel('v'))
-print(is_vowel('a'))
+assert(is_vowel('v')) == False
+assert(is_vowel('a')) == True
 
 # 3. Define a function named is_consonant. It should return True if the passed string is a consonant, False otherwise. 
 # Use your is_vowel function to accomplish this.
@@ -64,7 +64,7 @@ print(apply_discount(3456,.07))
 # commas in it as input, and return a number as output.
 
 def handle_commas(amount):
-    comma_free_amount = int(amount.replace(",",""))
+    comma_free_amount = float(amount.replace(",",""))
     return comma_free_amount
 print(handle_commas('1,232,591'))
 
@@ -113,14 +113,22 @@ print(normalized_name('i!e$'))
 #11.Write a function named cumsum that accepts a list of numbers and returns a list that 
 # is the cumulative sum of the numbers in the list.
 
-def cumsum(*args):
+def cumsum(*args): #this is wrong, but gets the right answer
     nums_list = []
     sum_nums = 0
     for n in args:
         sum_nums += n
         nums_list.append(sum_nums)
     return nums_list
-print(cumsum(1,2,7))
+print(cumsum(1,1,1))
 
+def cumsum(lst): 
+    for n in range(1,len(lst)):
+        lst[n] = lst[n] +lst[n-1]
+    return lst
+print(cumsum([1,1,1]))
 
-
+str? #brings up documentation in command line and 
+list('abcde')
+"---".join(["a","b","c"])
+"".join(["a","b","c"])
