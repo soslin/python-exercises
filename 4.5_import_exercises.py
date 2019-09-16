@@ -12,7 +12,7 @@
 # use from and give the function a different name
 
 import function_exercises as f
-f.accepts_string('hello')
+print(f.accepts_string('hello'))
 
 from function_exercises import calculate_tip
 print(calculate_tip(45,.18))
@@ -27,32 +27,56 @@ print (disc(3456,.07))
 # numbers 1, 2, and 3?
 
 from itertools import permutations
+print(list(permutations(['a','b','c',1,2,3])))
+print(len(list(permutations(['a','b','c',1,2,3]))))
 
-def permutations('abc123', r=3):
-    # permutations('ABCD', 2) --> AB AC AD BA BC BD CA CB CD DA DB DC
-    # permutations(range(3)) --> 012 021 102 120 201 210
-    pool = tuple(iterable)
-    n = len(pool)
-    r = n if r is None else r
-    if r > n:
-        return
-    indices = list(range(n))
-    cycles = list(range(n, n-r, -1))
-    yield tuple(pool[i] for i in indices[:r])
-    while n:
-        for i in reversed(range(r)):
-            cycles[i] -= 1
-            if cycles[i] == 0:
-                indices[i:] = indices[i+1:] + indices[i:i+1]
-                cycles[i] = n - i
-            else:
-                j = cycles[i]
-                indices[i], indices[-j] = indices[-j], indices[i]
-                yield tuple(pool[i] for i in indices[:r])
-                break
-        else:
-            return
 
 # How many different ways can you combine two of the letters from "abcd"?
 
+from itertools import combinations
+print(list(combinations(['a','b','c','d'],2)))
+print(len(list(combinations(['a','b','c','d'],2))))
 
+
+from json import load
+users = load(open('profiles.json', "r"))
+print(users)
+
+# Total number of users
+user_count = 0
+for user in users:
+    user_count +=1
+print(user_count)
+
+
+# Number of active users
+user_count = 0
+for user in users:
+    if user["isActive"] == True:
+        user_count +=1
+print(user_count)
+
+
+# Number of inactive users
+user_count = 0
+for user in users:
+    if user["isActive"] == False:
+        user_count +=1
+print(user_count)
+
+# Grand total of balances for all users
+user_balance = 0
+for user in users:
+    user_balance = float(user['balance'][1:].replace(",",""))
+
+print(user_balance)
+
+
+
+
+# Average balance per user
+# User with the lowest balance
+# User with the highest balance
+# Most common favorite fruit
+# Least most common favorite fruit
+# Total number of unread messages for all users
