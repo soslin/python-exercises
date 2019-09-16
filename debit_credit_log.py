@@ -1,0 +1,1 @@
+start_balance = 1_000.00
