@@ -27,8 +27,9 @@ print (disc(3456,.07))
 # numbers 1, 2, and 3?
 
 from itertools import permutations
-print(list(permutations(['a','b','c',1,2,3])))
-print(len(list(permutations(['a','b','c',1,2,3]))))
+
+print(list(permutations(["a","b","c", 1,2,3])))
+print(len(list(permutations(["a","b","c", 1,2,3]))))
 
 
 # How many different ways can you combine two of the letters from "abcd"?
@@ -42,12 +43,20 @@ from json import load
 users = load(open('profiles.json', "r"))
 print(users)
 
+type(users)
+type(users[0])
+print(users[0]['friends'][1]['name'])
+
+
+
 # Total number of users
 user_count = 0
 for user in users:
     user_count +=1
 print(user_count)
 
+user_count = len([user for user in users])
+print(user_count)
 
 # Number of active users
 user_count = 0
@@ -56,6 +65,8 @@ for user in users:
         user_count +=1
 print(user_count)
 
+user_count = len([user for user in users if user ["isActive"] == True])
+print(user_count)
 
 # Number of inactive users
 user_count = 0
@@ -64,19 +75,46 @@ for user in users:
         user_count +=1
 print(user_count)
 
-# Grand total of balances for all users
-user_balance = 0
-for user in users:
-    user_balance = float(user['balance'][1:].replace(",",""))
+user_count = len([user for user in users if user ["isActive"] == False])
+print(user_count)
 
+
+# Grand total of balances for all users
+
+user_balance = sum([float(user['balance'][1:].replace(",","")) for user in users])
 print(user_balance)
 
-
-
-
 # Average balance per user
+user_balance = (sum([float(user['balance'][1:].replace(",","")) for user in users]))/len(users)
+print(user_balance)
+
 # User with the lowest balance
+user_balance = min([float(user['balance'][1:].replace(",","")) for user in users])
+print(user_balance)
+
 # User with the highest balance
+user_balance = max([float(user['balance'][1:].replace(",","")) for user in users])
+print(user_balance)
+
 # Most common favorite fruit
+most_favorite_fruit = max([user['favoriteFruit'] for user in users])
+print(most_favorite_fruit)
+
+for user in user:
+    fruit = user['favoriteFruit']
+    if fruit in fruit_counts:
+        fruit_counts[fruit] += 1
+    else:
+        fruit_counts[fruit] = 1
+
 # Least most common favorite fruit
+most_favorite_fruit = min([user['favoriteFruit'] for user in users])
+print(most_favorite_fruit)
+
 # Total number of unread messages for all users
+total_unread_messages = [''.join(user['greeting']) for user in users if user['greeting'].isdigit()]
+print(total_unread_messages)
+
+greetings = [extract_digits(user['greeting']) for user in users]
+print(greetings)
+
