@@ -6,7 +6,7 @@ print(f"~~~ Welcome {user_id} to your terminal checkbook at the International Ba
 
 
 select_option = 1 
-                #prime select option to enter the while loop
+                #select option to enter the while loop
 while int(select_option) != 4: 
                 #!= 4 so the loop only runs for options 1 -3. Option 4 will exit
     print()
@@ -51,8 +51,8 @@ while int(select_option) != 4:
     elif select_option == 2:
         withdrawal = input('How much would you like to withdraw? ').strip()
         withdrawal = float(withdrawal)
-        while abs(withdrawal) > balance:
-                #prevent from overdrawing account
+        while withdrawal > balance:
+                #verify the account has enough money to prevent an overdraft.
             withdrawal = input('Your withdrawal request exceeds your account balance. Please enter a new amount: ')
             withdrawal = float(withdrawal) 
                 # will loop around until they put in an amount less than or equal to the balance
@@ -78,14 +78,17 @@ while int(select_option) != 4:
 
 
     elif select_option == 4:
-        print("Thank you for banking with us! We're a small town bank with a global reach!")
+        print(f"Thank you for banking with us, {user_id}!")
+        print()
+        print("We're a small town bank with a global reach!")
     
 
 
-# Other things I'd like to do
-# 1. rewrite the code so it is a function, to make it more compact
+# Next steps (fixing the shortcomings)
+# 1. rewrite the code so it is a function, to make it more compact and versatile
 # 2. figure out how to add a ',' in the thousands' place of the amount
-# 3. add isdigit so the menu and amount inputs can only accept 
+# 3. add isdigit so the menu only accept string numbers
+# 4. find something that would allow me to reject float values that include non-numeric characters
 
     
 
