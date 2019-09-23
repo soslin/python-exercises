@@ -208,3 +208,100 @@ print(b_reshaped2)
 
 
 
+## Setup 3
+c = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+c = np.array([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+])
+
+# HINT, you'll first need to make sure that the "c" variable is a numpy array prior to using numpy array methods.
+# Exercise 1 - Find the min, max, sum, and product of c.
+print(c.min())
+print(c.max())
+print(c.sum())
+print(c.prod())
+
+# Exercise 2 - Determine the standard deviation of c.
+print(c.std())
+
+
+
+# Exercise 3 - Determine the variance of c.
+print(c.var())
+
+
+# Exercise 4 - Print out the shape of the array c
+print(np.shape(c))
+
+
+# Exercise 5 - Transpose c and print out transposed result.
+c_transposed = np.transpose(c)
+print(c_transposed)
+
+# Exercise 6 - Multiply c by the c-Transposed and print the result.
+print(c * c_transposed)
+
+
+# Exercise 7 - Write the code necessary to sum up the result of c times c transposed. Answer should be 261
+print(c + c_transposed)
+
+
+# Exercise 8 - Write the code necessary to determine the product of c times c transposed. Answer should be 131681894400.
+print(np.prod(c*c_transposed))
+
+## Setup 4
+d = [
+    [90, 30, 45, 0, 120, 180],
+    [45, -90, -30, 270, 90, 0],
+    [60, 45, -45, 90, -45, 180]
+]
+
+d = np.array([
+    [90, 30, 45, 0, 120, 180],
+    [45, -90, -30, 270, 90, 0],
+    [60, 45, -45, 90, -45, 180]
+])
+# Exercise 1 - Find the sine of all the numbers in d
+print(np.sin(d))
+
+# Exercise 2 - Find the cosine of all the numbers in d
+print(np.cos(d))
+
+
+# Exercise 3 - Find the tangent of all the numbers in d
+print(np.tan(d))
+
+
+
+# Exercise 4 - Find all the negative numbers in d
+print(d[d<0])
+
+# Exercise 5 - Find all the positive numbers in d
+print(d[d>0])
+
+
+# Exercise 6 - Return an array of only the unique numbers in d.
+np.unique(d)
+
+
+# Exercise 7 - Determine how many unique numbers there are in d.
+len(np.unique(d))
+
+
+# Exercise 8 - Print out the shape of d.
+np.shape(d)
+
+
+# Exercise 9 - Transpose and then print out the shape of d.
+np.transpose(d)
+
+
+# Exercise 10 - Reshape d into an array of 9 x 2
+
+np.reshape(d,(2,9))
