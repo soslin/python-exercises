@@ -1,10 +1,16 @@
 import numpy as np
+# vectorization = applying an operation/function to every item in a vector/array (avoid loops)
 
 a = np.array([4, 10, 12, 23, -2, -1, 0, 0, 0, -6, 3, -7])
 
 # 1. How many negative numbers are there?
 
-(a < 0).sum()
+mask = a < 0 
+a[mask]
+
+# a<0 gives list T/F, wrap in a[] will show value at numeric index (boolean mask - a filter)
+#creates a new list (vectorized)
+
 
 # 2. How many positive numbers are there?
 np.count_nonzero(a) - (a < 0).sum()
@@ -14,11 +20,22 @@ even_numbers = a[a % 2 == 0]
 pos_numbers = even_numbers[even_numbers > 0]
 print(pos_numbers)
 
+# alternative approach using 2 masks
+is_pos_mask = a >0
+pos = a[is_pos_mask]
+is_even_mask = pos % 2 == 0
+pos_evens = pos[is_even_mask]
+pos_evens
+
 #4. If you were to add 3 to each data point, how many positive numbers would there be?
 num_plus_three = a + 3
 pos_plus_three = num_plus_three[num_plus_three > 0]
 count_pos_plus_three = np.count_nonzero(pos_plus_three)
 print(count_pos_plus_three)
+
+#shorter solution
+add_three = a + 3
+len(add_three[add_three > 0])
 
 #5. If you squared each number, what would the new mean and standard deviation be?
 num_squared = a ** 2
