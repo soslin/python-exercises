@@ -211,13 +211,18 @@ print(array_shape)
 b_transposed = np.transpose(b)
 print(b_transposed)
 
+print(b.transpose())
 
 # Exercise 11 - reshape the array b to be a single list of 6 numbers. (1 x 6)
 b_reshaped = np.reshape(b,(1,6))
 print(b_reshaped)
 
+#shorter
+b.flatten()
+print(b.flatten)
 
-
+#shortest
+print(b.flatten())
 
 # Exercise 12 - reshape the array b to be a list of 6 lists, each containing only 1 number (6 x 1)
 b_reshaped2 = np.reshape(b,(6,1))
@@ -239,18 +244,18 @@ c = np.array([
 
 # HINT, you'll first need to make sure that the "c" variable is a numpy array prior to using numpy array methods.
 # Exercise 1 - Find the min, max, sum, and product of c.
-print(c.min())
-print(c.max())
-print(c.sum())
-print(c.prod())
+print("min ", c.min())
+print("max ", c.max())
+print("sum ", c.sum())
+print("product ", c.prod())
 
 # Exercise 2 - Determine the standard deviation of c.
-print(c.std())
+print("standard deviation ", c.std())
 
 
 
 # Exercise 3 - Determine the variance of c.
-print(c.var())
+print("variation ", c.var())
 
 
 # Exercise 4 - Print out the shape of the array c
@@ -260,6 +265,8 @@ print(np.shape(c))
 # Exercise 5 - Transpose c and print out transposed result.
 c_transposed = np.transpose(c)
 print(c_transposed)
+
+print(c.transpose())
 
 # Exercise 6 - Multiply c by the c-Transposed and print the result.
 print(c * c_transposed)
@@ -285,7 +292,7 @@ d = np.array([
     [60, 45, -45, 90, -45, 180]
 ])
 # Exercise 1 - Find the sine of all the numbers in d
-print(np.sin(d))
+print(np.sin(d)) 
 
 # Exercise 2 - Find the cosine of all the numbers in d
 print(np.cos(d))
