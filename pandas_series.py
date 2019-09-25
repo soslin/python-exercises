@@ -61,6 +61,8 @@ def count_of_a(word):
 count_of_a('pineapple')
 fruits.apply(count_of_a)
 
+list(zip(fruits.unique(), pd.Series(fruits.unique())).apply(count_vowels))
+
 #Use the .apply method and a lambda function to find the fruit(s) containing two or 
 #more "o" letters in the name.
 
@@ -75,7 +77,7 @@ fruits[fruits.str.contains('berry')
 fruits[fruits.str.contains('apple')]
 
 #Which fruit has the highest amount of vowels?
-fruits.str.apply(count_of_a).idxmax()
+fruits[fruits.apply(count_of_a).idxmax()]
 
 
 
@@ -88,38 +90,39 @@ amounts = ['$796,459.41', '$278.60', '$482,571.67', '$4,503,915.98', '$2,121,418
 '$4,338,283.54', '$4,738,303.38', '$2,791,759.67', '$769,681.94', '$452,650.23']
 amounts = pd.Series(amounts)
 
-amounts = amounts.str.replace('$','')
-amounts = amounts.str.replace(',','')
+amounts = amounts.str.replace('$','').str.replace(',','')
 amounts
 
 #What is the data type of the series?
 type(amounts)
 
 #Use series operations to convert the series to a numeric data type.
-pd.to_numeric(amounts)
+amounts = pd.to_numeric(amounts)
 
 
-What is the maximum value? The minimum?
+#What is the maximum value? The minimum?
 amounts.max()
 amounts.min()
 
 amounts.describe
 
-Bin the data into 4 equally sized intervals and show how many values fall into each bin.
-Plot a histogram of the data. Be sure to include a title and axis labels.
+# Bin the data into 4 equally sized intervals and show how many values fall into each bin.
+# Plot a histogram of the data. Be sure to include a title and axis labels.
 
-pd.cut(amounts,4)
+pd.cut(amounts,4).value_counts()
+amounts.plot.hist() # default
+amounts.plot.hist(bins = 4) 
 
 
-
-
+#3. Use pandas to create a Series from the following exam scores:
 # Use pandas to create a Series from the following exam scores:
-
-
 scores = [60, 86, 75, 62, 93, 71, 60, 83, 95, 78, 65, 72, 69, 81, 96, 80, 85, 92, 82, 78]
 scores = pd.Series(scores)
+scores
 
 #What is the minimum exam score? The max, mean, median?
+print(scores.describe())
+print(scores.min())
 print(scores.max())
 print(scores.mean())
 print(scores.median())
@@ -127,46 +130,64 @@ print(scores.median())
 #Plot a histogram of the scores.
 
 import matplotlib.pyplot as plt
-scores.plot.hist()
+scores.plot.hist(bins = 4)
 
-
-
-
-#3. Use pandas to create a Series from the following exam scores:
-grades = [60, 86, 75, 62, 93, 71, 60, 83, 95, 78, 65, 72, 69, 81, 96, 80, 85, 92, 82, 78]
-grades = pd.Series(grades)
-
-#What is the minimum exam score? The max, mean, median?
-print(grades.max())
-print(grades.min())
-print(grades.mean())
-print(grades.median())
-
-#Plot a histogram of the scores.
-grades.plot.hist()
 
 Convert each of the numbers above into a letter grade. For example, 86 should be a 'B' 
 and 95 should be an 'A'.
+def convert_grades(num):
+    if num >= 90:
+        return 'A'
+    elif num >= 80:
+        return 'B'
+    elif num >= 70:
+        return 'C'
+    elif num >= 60:
+        return 'D'
+    else:
+        return 'F'
+scores.apply(convert_grades)
 
-def letter_grades(grades):
-    for n in grades:
-        if n >= 90:
-            return 'A'
-        elif n >= 80:
-            return 'B'
-        elif n >= 70:
-            return 'C'
-        elif n >= 60:
-            return 'D'
-        else:
-            return 'F'
-letter_grades(n)
-
-
-
+#alternate
+pd.cut(scores, bins = [0,60,70,80,90,100], labels = ['F', 'D', 'C', 'B', 'A'])
 
 
-
-
-Write the code necessary to implement a curve. I.e. that grade closest to 100 should be 
+#Write the code necessary to implement a curve. I.e. that grade closest to 100 should be 
 converted to a 100, and that many points should be given to every other score as well.
+
+scores = pd.Series(scores + (100-scores.max()))
+scores
+
+
+#Use pandas to create a Series from the following string:
+
+
+long_string = list('''hnvidduckkqxwymbimkccexbkmqygkxoyndmcxnwqarhyffsjpsrabtjzsypmzadfavyrnndndvswreauxovncxtwz
+pwejilzjrmmbbgbyxvjtewqthafnbkqplarokkyydtubbmnexoypulzwfhqvckdpqtpoppzqrmcvhhpwgjwupgzhiofohawy
+tlsiyecuproguy''')
+long_string = pd.Series(long_string)
+long_string
+
+#What is the most frequently occuring letter? Least frequently occuring?
+count = long_string.value_counts().max()
+count
+count = long_string.value_counts().tail()
+count
+
+How many vowels are in the list?
+vowels = ['a', 'e', 'i', 'o', 'u']
+count_vowels = long_string.str.count(['aeiou'])
+count_vowels
+
+How many consonants are in the list?
+
+#Create a series that has all of the same letters, but uppercased
+upper = long_string.str.upper()
+upper
+
+Create a bar plot of the frequencies of the 6 most frequently occuring letters.
+import matplotlib.pyplot as plt
+count_top_six = long_string.count_values().head(6)
+count_top_six
+
+count.plot.bar().
