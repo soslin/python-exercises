@@ -100,8 +100,21 @@ chipotle['item_price'] = chipotle['item_price'].replace('[\$,)]', '', regex = Tr
 
 four_most_popular_items = chipotle.groupby('item_name').agg({'quantity': 'count', 'item_price': 'sum'}).sort_values('quantity', ascending = False).head(4)
 print(four_most_popular_items)
+ 
+four_most_popular_items = four_most_popular_items.reset_index()
+four_most_popular_items
+
+sns.barplot(x = 'item_name', y = 'item_price', data = four_most_popular_items)
 
 
+# Load the sleepstudy data and read it's documentation. Use seaborn to create a line chart of all the individual subject's reaction times and a more prominant line showing the average change in reaction time.
 
+sleepstudy = data('sleepstudy')
+sleepstudy.describe()
+sleepstudy.head(30)
 
+sleep_mean = sleepstudy.groupby('Subject').agg({'Reaction' : 'mean'})
+ind_sleep_study = sleepstudy.groupby('Subject').mean()
+ind_sleep_study
 
+sns.lineplot(x = 'Days', y = 'Reaction', data = sleep_mean)
