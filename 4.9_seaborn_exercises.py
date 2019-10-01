@@ -10,7 +10,7 @@ url = f'mysql+pymysql://{user}:{password}@{host}/iris_db'
 df = pd.read_sql('SELECT * FROM measurements', url)
 print(df)
 
-
+import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -20,10 +20,11 @@ sns.distplot(df.petal_length)
 
 # Is there a correlation between petal length and petal width?
 sns.relplot(x = "petal_length", y = "petal_width", data = df)
-
+r = df.corr().loc['petal_length', 'petal_width'] #to get Pierson's r
+plt.text(1,5,2, f'r = {r :2}')
 
 # Would it be reasonable to predict species based on sepal width and sepal length?
-sns.relplot(x = "sepal_length", y = "sepal_width", data = df)
+sns.relplot(y = "sepal_length", x = "sepal_width", data = df)
 
 
 # Which features would be best used to predict species?
@@ -63,12 +64,14 @@ plt.title('Effectiveness of insect sprays')
 # Load the swiss dataset and read it's documentation. Create visualizations to answer the following questions:
 
 swiss = data('swiss')
-data("swiss", show_doc = True)
+data("swiss", show_doc = True) #show documentation
 swiss.describe()
 swiss.head(15)
 
-# Create an attribute named is_catholic that holds a boolean value of whether or not the province is Catholic. 
-swiss['is_catholic'] = np.where(swiss['Catholic'] > 66, True, False)
+sns.distplot(swiss.Catholic, bins = 10)
+
+# Create an attribute named is_catholic that holds a boolean value of whether or not the province is Catholic. (continuous to categorical variable)
+swiss['is_catholic'] = np.where(swiss['Catholic'] > 66, True, False) #arbitrarily selected 66%, could look at distplot to get a better idea of where the modes are.In this case, about 60%
 swiss.head(10)
 
 
@@ -79,10 +82,11 @@ sns.relplot(x = "Catholic", y = "Fertility", data = swiss)
 
 plt.figure(figsize = (12,10))
 sns.boxplot(data = swiss, y = 'Fertility', x = 'is_catholic')
-
+sns.relplot(x = "Catholic", y = "Fertility",  hue = is_catholic, data = swiss)
 
 # What measure correlates most strongly with fertility? - education (negatively correlated)
 sns.relplot(x = "Education", y = "Fertility", data = swiss)
+
 
 
 
@@ -98,10 +102,15 @@ chipotle.head(0)
 
 chipotle['item_price'] = chipotle['item_price'].replace('[\$,)]', '', regex = True).astype(float)
 
-four_most_popular_items = chipotle.groupby('item_name').agg({'quantity': 'count', 'item_price': 'sum'}).sort_values('quantity', ascending = False).head(4)
+four_most_popular_items = (chipotle.groupby('item_name')
+    .agg({'quantity': 'count', 'item_price': 'sum'})
+    .sort_values('quantity', ascending = False)
+    .head(4)
+    .reset_index() # will take current index and turn into a new column
+                    ) # to put on multiply lines, must wrap whole thing in ()
 print(four_most_popular_items)
  
-four_most_popular_items = four_most_popular_items.reset_index()
+four_most_popular_items = four_most_popular_items.reset_index() #rewrote code above to include the reindex
 four_most_popular_items
 
 sns.barplot(x = 'item_name', y = 'item_price', data = four_most_popular_items)
@@ -118,3 +127,5 @@ ind_sleep_study = sleepstudy.groupby('Subject').mean()
 ind_sleep_study
 
 sns.lineplot(x = 'Days', y = 'Reaction', data = sleep_mean)
+sns.lineplot(x = 'Days', y = 'Reaction', hue = 'Subject', data = sleep_mean)
+
